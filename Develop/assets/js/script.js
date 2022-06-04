@@ -47,10 +47,20 @@ clearButton.on("click", function(event){
 })
 
 // set currentDay text to current day via moment
+$("#currentDay").text(moment().format("MMMM Do, YYYY"))
+var currentHour = moment().format("H")
 
 
 // for each time block, change its styling/color based on whether it is before, after, or at the current hour
-// for (var = 0; i < timeLabel.length; i++) {
-
-// }
+for (var i = 0; i < timeLabel.length; i++) {
+    timeTextList[i] = $(timeLabel[i]).text()
+    var blockTime = parseInt(textAreas[i].substring(1,3))
+    if (currentHour > blockTime) {
+        $(textAreas[i]).attr("class", "past")
+    } else if (currentHour == blockTime) {
+        $(textAreas[i]).attr("class", "present")
+    } else if (currentHour < blockTime) {
+        $(textAreas[i]).attr("class", "future")
+    }
+}
 
